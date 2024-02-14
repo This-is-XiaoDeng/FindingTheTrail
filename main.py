@@ -1,11 +1,29 @@
 from map import generate
-from search import Searcher
+from search import search
 
 game_map = generate()
 print("Map:")
 print("\n".join(str(row) for row in game_map))
 
+# game_map = [
+#     [1, 1, 1, 3, 1, 1, 1, 1],
+#     [1, 0, 0, 0, 2, 4, 1, 1],
+#     [1, 0, 0, 1, 0, 1, 2, 1],
+#     [1, 1, 0, 0, 0, 0, 0, 1],
+#     [1, 0, 0, 0, 0, 0, 0, 1],
+#     [1, 1, 1, 1, 1, 1, 1, 1]
+# ]
+
+# game_map = [
+#     [1, 1, 1, 1, 1, 3, 1, 1],
+#     [1, 0, 0, 0, 0, 0, 2, 1],
+#     [1, 0, 0, 0, 0, 0, 0, 1],
+#     [1, 0, 0, 0, 0, 0, 0, 1],
+#     [1, 0, 4, 0, 0, 0, 0, 1],
+#     [1, 1, 1, 1, 1, 1, 1, 1]
+# ]
+
 print("\nSteps (MIN):")
-print(Searcher(game_map).search())
+print(search(game_map))
 
 
