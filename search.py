@@ -1,7 +1,7 @@
 from tkinter import N
 from typing import TypedDict
 from const import *
-
+import copy
 
 def get_item_by_pos(pos: tuple[int, int], game_map: list[list[int]]) -> int:
     return game_map[pos[0]][pos[1]]
@@ -48,6 +48,20 @@ def move(game_map: list[list[int]], pos: tuple[int, int], direction: int) -> tup
         elif item == SPECIAL:
             game_map[pos[0]][pos[1]] = WALL
 
+# map = [
+# [1, 1, 1, 3, 1, 1, 1, 1],
+# [1, 0, 2, 0, 0, 0, 0, 1],
+# [1, 0, 0, 0, 0, 0, 0, 1],
+# [1, 1, 0, 0, 0, 0, 0, 1],
+# [1, 0, 0, 0, 0, 0, 1, 1],
+# [1, 1, 1, 1, 1, 1, 1, 1]
+# ]
+# pos = (1,6)
+# for s in [4, 3, 1]:
+#     map, pos = move(map, pos, s)
+#     print(pos, s)
+#     print("\n".join(str(row) for row in map))
+
 class QueueItem(TypedDict):
     game_map: list[list[int]]
     direction: int
@@ -58,7 +72,7 @@ def search(game_map: list[list[int]], max_step: int = 15) -> list[int]:
     game_map, start_pos = get_start_pos(game_map)
     queue: list[QueueItem] = [{
         "direction": d,
-        "game_map": game_map.copy(),
+        "game_map": copy.deepcopy(game_map),
         "original_pos": start_pos,
         "path": [d]
     } for d in get_moveable_direction(game_map, start_pos)]
@@ -71,7 +85,7 @@ def search(game_map: list[list[int]], max_step: int = 15) -> list[int]:
         queue.extend([{
             "direction": d,
             "original_pos": pos,
-            "game_map": game_map.copy(),
+            "game_map": copy.deepcopy(game_map),
             "path": item["path"] + [d]
         } for d in get_moveable_direction(game_map, pos)])
         # print(item["path"])
