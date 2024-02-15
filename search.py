@@ -68,7 +68,7 @@ class QueueItem(TypedDict):
     original_pos: tuple[int, int]
     path: list[int]
 
-def search(game_map: list[list[int]], max_step: int = 15) -> list[int]:
+def search(game_map: list[list[int]], max_step: int = 12) -> list[int]:
     game_map, start_pos = get_start_pos(game_map)
     queue: list[QueueItem] = [{
         "direction": d,

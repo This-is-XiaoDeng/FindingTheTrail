@@ -32,7 +32,12 @@ print("\n".join(str(row) for row in game_map))
 # [1, 1, 1, 1, 1, 1, 1, 1]
 # ]
 
+import copy
 print("\nSteps (MIN):")
-print(search(game_map))
+print(search(copy.deepcopy(game_map)))
+
+from image import generate
+
+generate(game_map)
 
 
